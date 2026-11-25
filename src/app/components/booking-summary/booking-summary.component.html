@@ -1,0 +1,44 @@
+<section class="card summary-card" aria-labelledby="summary-title">
+  <div class="summary-heading">
+    <div>
+      <p class="eyebrow">YOUR BOOKING</p>
+      <h2 id="summary-title">Your seats</h2>
+    </div>
+    <span class="summary-count">{{ booking.mySeats().length }}</span>
+  </div>
+
+  <label class="passenger-id-label" for="passenger-id">Passenger ID</label>
+  <input #passengerIdInput id="passenger-id" class="passenger-id-input" type="text" maxlength="32" autocomplete="off"
+    [value]="booking.passengerId()" (input)="updatePassengerId(passengerIdInput.value)">
+  <p class="passenger-id-hint">This ID is attached to your seat selections.</p>
+
+  @if (booking.mySeats().length) {
+  <ul class="selected-seats">
+    @for (seat of booking.mySeats(); track seat.seatNo) {
+    <li class="selected-seat">
+      <span class="selected-seat-icon" aria-hidden="true">
+        <i class="fas fa-check"></i>
+      </span>
+      <span class="selected-seat-label">
+        Seat <strong>{{ seat.seatNo.toString().padStart(2, '0') }}</strong>
+        <small>Passenger {{ seat.passengerId || 'ID not entered' }}</small>
+      </span>
+      <button type="button" class="remove-seat" [attr.aria-label]="'Cancel seat ' + seat.seatNo"
+        (click)="booking.cancelSeat(seat.seatNo)">×</button>
+    </li>
+    }
+  </ul>
+  <button class="clear-all" type="button" (click)="booking.clearMySeats()">Clear all seats</button>
+  } @else {
+  <div class="empty-selection">
+    <span class="empty-seat-icon" aria-hidden="true">
+      <i class="fas fa-plus"></i>
+    </span>
+    <p>No seats selected yet</p>
+    <span>Pick a seat from the layout to get started.</span>
+  </div>
+  }
+
+  <div class="summary-footnote"><span aria-hidden="true">◈</span> You can select multiple seats
+  </div>
+</section>

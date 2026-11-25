@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.seat-cue {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  min-width: 13px;
+  height: 13px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffffc9;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.seat-available .seat-cue {
+  color: #368b6e;
+}
+
+.seat-taken .seat-cue {
+  color: #68746f;
+}
+
+.seat-mine .seat-cue {
+  color: #168567;
+}
+
+@media (max-width: 390px) {
+  .seat-cue {
+    top: 2px;
+    right: 3px;
+  }
+}

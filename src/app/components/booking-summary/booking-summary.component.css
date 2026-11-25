@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.passenger-id-label {
+  display: block;
+  margin: 15px 0 5px;
+  color: #647572;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.passenger-id-input {
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #dfe7e3;
+  border-radius: 9px;
+  color: #34474b;
+  background: #fbfdfc;
+  font: inherit;
+  font-size: 12px;
+}
+
+.passenger-id-input:focus {
+  border-color: #42a987;
+  outline: 3px solid #42a9872a;
+}
+
+.passenger-id-hint {
+  margin: 5px 0 0;
+  color: #8c9894;
+  font-size: 10px;
+}
+
+.selected-seat-label small {
+  display: block;
+  margin-top: 2px;
+  color: #899590;
+  font-size: 9px;
+}

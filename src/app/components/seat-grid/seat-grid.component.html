@@ -1,0 +1,36 @@
+<div class="bus-layout">
+  <div class="driver-area" aria-hidden="true">
+    <span class="steering-wheel">◉</span>
+    <span class="front-label">FRONT OF BUS</span>
+  </div>
+
+  <!-- <div class="aisle" aria-hidden="true">
+    <span>WINDOW</span><span>WINDOW</span>
+  </div> -->
+
+  <div class="seat-grid" role="group" aria-label="Bus seat selection, 40 seats in 5 rows">
+    @for (seat of booking.seats(); track seat.seatNo) {
+    <button type="button" class="seat" [class]="'seat seat-' + stateOf(seat)"
+      [attr.aria-label]="'Seat ' + seat.seatNo + ', ' + (stateOf(seat) === 'available' ? 'available' : stateOf(seat) === 'mine' ? 'booked by you, click to cancel' : 'booked by another passenger')"
+      [attr.aria-pressed]="stateOf(seat) === 'mine'"
+      [title]="stateOf(seat) === 'taken' ? 'Booked by another passenger' : stateOf(seat) === 'mine' ? 'Your seat — click to cancel' : 'Select seat ' + seat.seatNo"
+      (click)="activateSeat(seat.seatNo)">
+      <span class="seat-cue" aria-hidden="true">{{ cueFor(seat) }}</span>
+      <span class="seat-number">{{ seat.seatNo.toString().padStart(2, '0') }}</span>
+    </button>
+    }
+  </div>
+</div>
+
+<div class="legend-note">
+  <div class="seat-legend" aria-label="Seat legend">
+    @for (item of booking.legend; track item.state) {
+    <span class="legend-item">
+      <i [class]="'legend-swatch swatch-' + item.state" aria-hidden="true">{{ item.cue }}</i>
+      {{ item.label }}
+    </span>
+    }
+  </div>
+  <p>Green = available · Grey = booked · Check = your seat</p>
+  <span class="threshold-note">Green ≤60% · Yellow 60–90% · Red 90–100% · Blocked &gt;99.5%</span>
+</div>
